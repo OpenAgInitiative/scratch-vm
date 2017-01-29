@@ -135,7 +135,7 @@ var Runtime = function () {
     this.redrawRequested = false;
 
     // Register all given block packages.
-    this._registerBlockPackages();
+    this.registerBlockPackages(defaultBlockPackages);
 
     // Register and initialize "IO devices", containers for processing
     // I/O related data.
@@ -237,10 +237,7 @@ Runtime.MAX_CLONES = 300;
  * @param {!string} packageToLoad The package to be loaded, if null load the defaultBlockPackages
  * @private
  */
-Runtime.prototype._registerBlockPackages = function (packageToLoad) {
-    if (packageToLoad === null){
-        packageToLoad = defaultBlockPackages;
-    }
+Runtime.prototype.registerBlockPackages = function (packageToLoad) {
     for (var packageName in packageToLoad) {
         if (packageToLoad.hasOwnProperty(packageName)) {
             // @todo pass a different runtime depending on package privilege?
