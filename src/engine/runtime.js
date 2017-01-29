@@ -140,11 +140,12 @@ var Runtime = function () {
     // Register and initialize "IO devices", containers for processing
     // I/O related data.
     /** @type {Object.<string, Object>} */
-    this.ioDevices = {
+    this.ioDevices = {};
+    this.registerIODevices({
         clock: new Clock(),
         keyboard: new Keyboard(this),
         mouse: new Mouse(this)
-    };
+    });
 };
 
 /**
@@ -234,14 +235,13 @@ Runtime.MAX_CLONES = 300;
 /**
  * Register default block packages with this runtime.
  * @todo Prefix opcodes with package name.
- * @param {!string} packageToLoad The package to be loaded, if null load the defaultBlockPackages
- * @private
+ * @param {*} packages An object full of (key, package) fields to be registered.
  */
-Runtime.prototype.registerBlockPackages = function (packageToLoad) {
-    for (var packageName in packageToLoad) {
-        if (packageToLoad.hasOwnProperty(packageName)) {
+Runtime.prototype.registerBlockPackages = function (packages) {
+    for (var packageName in packages) {
+        if (packages.hasOwnProperty(packageName)) {
             // @todo pass a different runtime depending on package privilege?
-            var packageObject = new (packageToLoad[packageName])(this);
+            var packageObject = new (packages[packageName])(this);
             // Collect primitives from package.
             if (packageObject.getPrimitives) {
                 var packagePrimitives = packageObject.getPrimitives();
@@ -264,6 +264,18 @@ Runtime.prototype.registerBlockPackages = function (packageToLoad) {
         }
     }
 };
+
+/**
+ * Register an IO device with the runtime.
+ * @param {*} an object of (name, device) fields to register.
+ */
+Runtime.prototype.registerIODevices = function (devices) {
+    for (var deviceName in devices) {
+        if (devices.hasOwnProperty(deviceName)) {
+            this.ioDevices[deviceName] = devices[deviceName];
+        }
+    }
+}
 
 /**
  * Retrieve the function associated with the given opcode.
