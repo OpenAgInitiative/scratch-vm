@@ -8,6 +8,7 @@ var util = require('util');
 var Clock = require('../io/clock');
 var Keyboard = require('../io/keyboard');
 var Mouse = require('../io/mouse');
+var OpenAgRest = require('../openag/io/rest');
 
 var defaultBlockPackages = {
     scratch3_control: require('../blocks/scratch3_control'),
@@ -19,7 +20,8 @@ var defaultBlockPackages = {
     scratch3_sound: require('../blocks/scratch3_sound'),
     scratch3_sensing: require('../blocks/scratch3_sensing'),
     scratch3_data: require('../blocks/scratch3_data'),
-    scratch3_procedures: require('../blocks/scratch3_procedures')
+    scratch3_procedures: require('../blocks/scratch3_procedures'),
+    openag_blocks: require('../openag/blocks/blocks')
 };
 
 /**
@@ -144,7 +146,8 @@ var Runtime = function () {
     this.registerIODevices({
         clock: new Clock(),
         keyboard: new Keyboard(this),
-        mouse: new Mouse(this)
+        mouse: new Mouse(this),
+        rest: new OpenAgRest(this)
     });
 };
 
