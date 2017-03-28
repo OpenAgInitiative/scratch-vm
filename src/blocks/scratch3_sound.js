@@ -39,6 +39,15 @@ Scratch3SoundBlocks.prototype.getPrimitives = function () {
 Scratch3SoundBlocks.prototype.playSound = function (args, util) {
     var index = this._getSoundIndex(args.SOUND_MENU, util);
     util.target.audioPlayer.playSound(index);
+    console.log('debugrob turn BLUE light on');
+    // curl -X POST -H "Content-Type:application/json" http://192.168.1.2:5984/_openag/api/0.0.1/topic/actuators/blue_light_1/cmd --data "[1.0]"
+    /*debugrob, causes bug
+    var resultPromise = util.ioQuery('rest', 'request', {
+      method: 'POST',
+      url: 'http://192.168.1.2:5984/_openag/api/0.0.1/topic/actuators/blue_light_1/cmd',
+      body: [1.0]
+    });
+    */
 };
 
 Scratch3SoundBlocks.prototype.playSoundAndWait = function (args, util) {

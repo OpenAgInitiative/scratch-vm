@@ -16,6 +16,9 @@ var Scratch3MotionBlocks = function (runtime) {
  */
 Scratch3MotionBlocks.prototype.getPrimitives = function () {
     return {
+/*debugrob comment out below to kill the block.  also in:
+     ~/scratch-blocks/blocks_vertical/default_toolbox.js
+*/
         motion_movesteps: this.moveSteps,
         motion_gotoxy: this.goToXY,
         motion_goto: this.goTo,
@@ -36,6 +39,8 @@ Scratch3MotionBlocks.prototype.getPrimitives = function () {
     };
 };
 
+/*debugrob
+*/
 Scratch3MotionBlocks.prototype.moveSteps = function (args, util) {
     var steps = Cast.toNumber(args.STEPS);
     var radians = MathUtil.degToRad(90 - util.target.direction);

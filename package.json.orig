@@ -39,7 +39,7 @@
     "minilog": "3.0.1",
     "promise": "7.1.1",
     "scratch-audio": "latest",
-    "scratch-blocks": "git+https://github.com/rbaynes/scratch-blocks.git#develop",
+    "scratch-blocks": "0.1.0-prerelease.1490301704",
     "scratch-render": "latest",
     "script-loader": "0.7.0",
     "stats.js": "0.16.0",
