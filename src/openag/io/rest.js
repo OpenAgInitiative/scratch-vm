@@ -5,29 +5,14 @@ var JSON_HEADERS = new Headers({
 });
 
 // Response message box
-function RestData(url, status, body) {
+function RestResponse(method, url, status, body) {
     return {
-        type: 'RestData',
+        type: 'RestResponse',
+        method: method,
         url: url,
         status: status,
         body: body
     };
-}
-
-// Reads a `RestResponse` from a DOM Response instance.
-// Returns a promise for a normalized RestData object.
-function readResponse(response) {
-    return (
-        response.ok
-        // If HTTP request was successful, parse JSON, then box in a success
-        // container.
-        // See https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch.
-        ? response.json().then(function (data) {
-            return RestData(response.url, response.status, data)
-        })
-        // If response was a failure, box HTTP status in an error box.
-        : Promise.resolve(RestData(response.url, response.status, {}))
-    );
 }
 
 // Kick off an HTTP rest request.
@@ -43,7 +28,27 @@ function fetchRest(url, method, body) {
     });
 
     // Fetch and handle promise
-    return fetch(request).then(readResponse);
+    return fetch(request).then(function (response) {
+        if (response.ok) {
+            // If HTTP request was successful, parse JSON, then box in a success
+            // container.
+            // See https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch.
+            return response.json().then(function (data) {
+                return RestResponse(method, response.url, response.status, data);
+            });
+        }
+        else {
+            // If response was a failure, box in an error box.
+            return Promise.resolve(
+                RestResponse(method, response.url, response.status, null)
+            );
+        }
+    });
+}
+
+function makeCacheKey(method, url) {
+    // Lowercase the key to normalize it.
+    return method.toLowerCase() + url.toLowerCase()
 }
 
 var Rest = function (runtime) {
@@ -56,24 +61,38 @@ var Rest = function (runtime) {
     this.cache = {};
 };
 
-Rest.prototype.postData = function (data) {
-    // Cache this RestData object at its URL.
-    this.cache[data.url] = data;
+Rest.prototype.postData = function (restResponse) {
+    // Cache this RestResponse object at its URL.
+    var key = makeCacheKey(restResponse.method, restResponse.url);
+    this.cache[key] = restResponse;
 }
 
-Rest.prototype.getBody = function (url) {
-    if (this.cache[url]) {
-        return this.cache[url].body;
+// IO Devices don't use callbacks. Instead, they cache the last result for an
+//asynchronous operation and provide a getter method for that cached value.
+// We cache the last response body by url. You can get it by providing the url
+// that was used fof the query.
+Rest.prototype.getBody = function (args) {
+    var url = args.url;
+    var method = args.method;
+    var key = makeCacheKey(method, url);
+    if (this.cache[key]) {
+        return this.cache[key].body;
     }
     else {
-        return {};
+        return null;
     }
 }
 
-Rest.prototype.request = function (url, method, body) {
+// We define a method for issuing requests.
+// IO Device methods can only receive one argument when called through ioQuery,
+// so we pass in an args object.
+Rest.prototype.request = function (args) {
+    var url = args.url;
+    var method = args.method;
+    var body = args.body;
     var self = this;
-    return fetchRest(url, method, body).then(function (rest) {
-        self.postData(rest);
+    return fetchRest(url, method, body).then(function (restResponse) {
+        self.postData(restResponse);
     });
 }
 
