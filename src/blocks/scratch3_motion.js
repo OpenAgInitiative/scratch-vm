@@ -16,7 +16,7 @@ var Scratch3MotionBlocks = function (runtime) {
  */
 Scratch3MotionBlocks.prototype.getPrimitives = function () {
     return {
-/*debugrob comment out below to kill the block.  also in:
+/*debugrob also change:
      ~/scratch-blocks/blocks_vertical/default_toolbox.js
 */
         motion_movesteps: this.moveSteps,
@@ -39,14 +39,14 @@ Scratch3MotionBlocks.prototype.getPrimitives = function () {
     };
 };
 
-/*debugrob
-*/
 Scratch3MotionBlocks.prototype.moveSteps = function (args, util) {
+/*debugrob, neuter
     var steps = Cast.toNumber(args.STEPS);
     var radians = MathUtil.degToRad(90 - util.target.direction);
     var dx = steps * Math.cos(radians);
     var dy = steps * Math.sin(radians);
     util.target.setXY(util.target.x + dx, util.target.y + dy);
+*/
 };
 
 Scratch3MotionBlocks.prototype.goToXY = function (args, util) {
@@ -76,21 +76,28 @@ Scratch3MotionBlocks.prototype.goTo = function (args, util) {
 };
 
 Scratch3MotionBlocks.prototype.turnRight = function (args, util) {
+/*debugrob, neuter
     var degrees = Cast.toNumber(args.DEGREES);
     util.target.setDirection(util.target.direction + degrees);
+*/
 };
 
 Scratch3MotionBlocks.prototype.turnLeft = function (args, util) {
+/*debugrob, neuter
     var degrees = Cast.toNumber(args.DEGREES);
     util.target.setDirection(util.target.direction - degrees);
+*/
 };
 
 Scratch3MotionBlocks.prototype.pointInDirection = function (args, util) {
+/*debugrob, neuter
     var direction = Cast.toNumber(args.DIRECTION);
     util.target.setDirection(direction);
+*/
 };
 
 Scratch3MotionBlocks.prototype.pointTowards = function (args, util) {
+/*debugrob, neuter
     var targetX = 0;
     var targetY = 0;
     if (args.TOWARDS === '_mouse_') {
@@ -107,6 +114,7 @@ Scratch3MotionBlocks.prototype.pointTowards = function (args, util) {
     var dy = targetY - util.target.y;
     var direction = 90 - MathUtil.radToDeg(Math.atan2(dy, dx));
     util.target.setDirection(direction);
+*/
 };
 
 Scratch3MotionBlocks.prototype.glide = function (args, util) {

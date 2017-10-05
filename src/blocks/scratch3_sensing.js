@@ -31,6 +31,7 @@ Scratch3SensingBlocks.prototype.getPrimitives = function () {
 };
 
 Scratch3SensingBlocks.prototype.touchingObject = function (args, util) {
+/*debugrob
     var requestedObject = args.TOUCHINGOBJECTMENU;
     if (requestedObject === '_mouse_') {
         var mouseX = util.ioQuery('mouse', 'getX');
@@ -41,20 +42,26 @@ Scratch3SensingBlocks.prototype.touchingObject = function (args, util) {
     } else {
         return util.target.isTouchingSprite(requestedObject);
     }
+*/
 };
 
 Scratch3SensingBlocks.prototype.touchingColor = function (args, util) {
+/*debugrob
     var color = Cast.toRgbColorList(args.COLOR);
     return util.target.isTouchingColor(color);
+*/
 };
 
 Scratch3SensingBlocks.prototype.colorTouchingColor = function (args, util) {
+/*debugrob
     var maskColor = Cast.toRgbColorList(args.COLOR);
     var targetColor = Cast.toRgbColorList(args.COLOR2);
     return util.target.colorIsTouchingColor(targetColor, maskColor);
+*/
 };
 
 Scratch3SensingBlocks.prototype.distanceTo = function (args, util) {
+/*debugrob
     if (util.target.isStage) return 10000;
 
     var targetX = 0;
@@ -74,6 +81,7 @@ Scratch3SensingBlocks.prototype.distanceTo = function (args, util) {
     var dx = util.target.x - targetX;
     var dy = util.target.y - targetY;
     return Math.sqrt((dx * dx) + (dy * dy));
+*/
 };
 
 Scratch3SensingBlocks.prototype.getTimer = function (args, util) {
@@ -93,7 +101,9 @@ Scratch3SensingBlocks.prototype.getMouseY = function (args, util) {
 };
 
 Scratch3SensingBlocks.prototype.getMouseDown = function (args, util) {
+/*debugrob
     return util.ioQuery('mouse', 'getIsDown');
+*/
 };
 
 Scratch3SensingBlocks.prototype.current = function (args) {
@@ -112,7 +122,9 @@ Scratch3SensingBlocks.prototype.current = function (args) {
 };
 
 Scratch3SensingBlocks.prototype.getKeyPressed = function (args, util) {
+/*debugrob
     return util.ioQuery('keyboard', 'getKeyIsDown', args.KEY_OPTION);
+*/
 };
 
 Scratch3SensingBlocks.prototype.daysSince2000 = function () {

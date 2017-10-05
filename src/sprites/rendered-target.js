@@ -70,7 +70,8 @@ RenderedTarget.prototype.initDrawable = function () {
     if (this.runtime && this.runtime.audioEngine) {
         if (this.isOriginal) {
             this.sprite.audioPlayer = this.runtime.audioEngine.createPlayer();
-            this.sprite.audioPlayer.loadSounds(this.sprite.sounds);
+//debugrob: Uncaught TypeError: this.sprite.audioPlayer.loadSounds is not a function
+//            this.sprite.audioPlayer.loadSounds(this.sprite.sounds);
         }
         this.audioPlayer = this.sprite.audioPlayer;
     }

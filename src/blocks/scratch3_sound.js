@@ -37,22 +37,31 @@ Scratch3SoundBlocks.prototype.getPrimitives = function () {
 };
 
 Scratch3SoundBlocks.prototype.playSound = function (args, util) {
+/*debugrob
     var index = this._getSoundIndex(args.SOUND_MENU, util);
     util.target.audioPlayer.playSound(index);
-    console.log('debugrob turn BLUE light on');
-    // curl -X POST -H "Content-Type:application/json" http://192.168.1.2:5984/_openag/api/0.0.1/topic/actuators/blue_light_1/cmd --data "[1.0]"
-    /*debugrob, causes bug
+*/
+    console.log('RED on');
+    /* curl -X POST -H "Content-Type:application/json" http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_red/commanded --data "[1.0]"
+    */
     var resultPromise = util.ioQuery('rest', 'request', {
       method: 'POST',
-      url: 'http://192.168.1.2:5984/_openag/api/0.0.1/topic/actuators/blue_light_1/cmd',
+      url: 'http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_red/commanded',
       body: [1.0]
     });
-    */
 };
 
 Scratch3SoundBlocks.prototype.playSoundAndWait = function (args, util) {
+/*debugrob
     var index = this._getSoundIndex(args.SOUND_MENU, util);
     return util.target.audioPlayer.playSound(index);
+*/
+    console.log('WHITE on');
+    var resultPromise = util.ioQuery('rest', 'request', {
+      method: 'POST',
+      url: 'http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_white/commanded',
+      body: [1.0]
+    });
 };
 
 Scratch3SoundBlocks.prototype._getSoundIndex = function (soundName, util) {
@@ -75,19 +84,51 @@ Scratch3SoundBlocks.prototype._getSoundIndex = function (soundName, util) {
 };
 
 Scratch3SoundBlocks.prototype.stopAllSounds = function (args, util) {
+/*debugrob
     util.target.audioPlayer.stopAllSounds();
+*/
+    console.log('RED off');
+    var resultPromise = util.ioQuery('rest', 'request', {
+      method: 'POST',
+      url: 'http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_red/commanded',
+      body: [0.0]
+    });
 };
 
 Scratch3SoundBlocks.prototype.playNoteForBeats = function (args, util) {
+/*debugrob
     return util.target.audioPlayer.playNoteForBeats(args.NOTE, args.BEATS);
+*/
+    console.log('BLUE off');
+    var rptwo = util.ioQuery('rest', 'request', {
+      method: 'POST',
+      url: 'http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_blue/commanded',
+      body: [0.0]
+    });
 };
 
 Scratch3SoundBlocks.prototype.playDrumForBeats = function (args, util) {
+/*debugrob
     return util.target.audioPlayer.playDrumForBeats(args.DRUM, args.BEATS);
+*/
+    console.log('BLUE on');
+    var resultPromise = util.ioQuery('rest', 'request', {
+      method: 'POST',
+      url: 'http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_blue/commanded',
+      body: [1.0]
+    });
 };
 
 Scratch3SoundBlocks.prototype.restForBeats = function (args, util) {
+/*debugrob
     return util.target.audioPlayer.waitForBeats(args.BEATS);
+*/
+    console.log('WHITE off');
+    var rptwo = util.ioQuery('rest', 'request', {
+      method: 'POST',
+      url: 'http://18.111.31.103:5984/_openag/api/0.0.1/topic/environments/environment_1/light_intensity_white/commanded',
+      body: [0.0]
+    });
 };
 
 Scratch3SoundBlocks.prototype.setInstrument = function (args, util) {

@@ -9,7 +9,10 @@ h2 {
 }
 #blocks {
     position: absolute;
+/*debugrob
     left: 40%;
+*/
+    left: 0;
     right: 0;
     top: 0;
     bottom: 0;
@@ -18,11 +21,18 @@ h2 {
 #vm-devtools {
     color: rgb(217,217,217);
     position: absolute;
+/*debugrob
     left: 1%;
     right: 60%;
     top: 1%;
     bottom: 0;
     width: 35%;
+*/ 
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 0;
 }
 #blockexplorer, #threadexplorer, #importexport {
     position: absolute;

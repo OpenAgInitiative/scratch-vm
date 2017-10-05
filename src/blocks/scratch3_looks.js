@@ -70,11 +70,15 @@ Scratch3LooksBlocks.prototype.thinkforsecs = function (args, util) {
 };
 
 Scratch3LooksBlocks.prototype.show = function (args, util) {
+/*debugrob
     util.target.setVisible(true);
+*/
 };
 
 Scratch3LooksBlocks.prototype.hide = function (args, util) {
+/*debugrob
     util.target.setVisible(false);
+*/
 };
 
 /**
@@ -119,7 +123,9 @@ Scratch3LooksBlocks.prototype._setCostumeOrBackdrop = function (target,
 };
 
 Scratch3LooksBlocks.prototype.switchCostume = function (args, util) {
+/*debugrob
     this._setCostumeOrBackdrop(util.target, args.COSTUME);
+*/
 };
 
 Scratch3LooksBlocks.prototype.nextCostume = function (args, util) {

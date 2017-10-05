@@ -185,11 +185,13 @@ Scratch3PenBlocks.prototype.getPrimitives = function () {
  * The pen "clear" block clears the pen layer's contents.
  */
 Scratch3PenBlocks.prototype.clear = function () {
+/*debugrob
     var penSkinId = this._getPenLayerID();
     if (penSkinId >= 0) {
         this.runtime.renderer.penClear(penSkinId);
         this.runtime.requestRedraw();
     }
+*/
 };
 
 /**
@@ -198,12 +200,14 @@ Scratch3PenBlocks.prototype.clear = function () {
  * @param {object} util - utility object provided by the runtime.
  */
 Scratch3PenBlocks.prototype.stamp = function (args, util) {
+/*debugrob
     var penSkinId = this._getPenLayerID();
     if (penSkinId >= 0) {
         var target = util.target;
         this.runtime.renderer.penStamp(penSkinId, target.drawableID);
         this.runtime.requestRedraw();
     }
+*/
 };
 
 /**
